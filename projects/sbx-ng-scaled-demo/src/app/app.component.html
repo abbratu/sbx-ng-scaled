@@ -1,0 +1,23 @@
+
+<div>
+    <label>Width:</label>
+    <input type="number" [(ngModel)]="data.width"/>
+</div>
+<div>
+    <label>Height:</label>
+    <input type="number" [(ngModel)]="data.height"/>
+</div>
+
+<div>
+    <label>Scale:</label>
+    <input type="number" [(ngModel)]="data.scale"/>
+</div>
+
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+    <sbx-ng-scaled [width]="data.width" [height]="data.height" [scale]="data.scale">testing</sbx-ng-scaled>
+    &nbsp;
+    <sbx-ng-scaled [width]="data.width" [height]="data.height" [scale]="data.scale">testing</sbx-ng-scaled>
+    &nbsp;
+    <sbx-ng-scaled [width]="data.width" [height]="data.height" [scale]="data.scale">testing</sbx-ng-scaled>
+</div>
+

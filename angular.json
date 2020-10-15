@@ -1,0 +1,168 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "sbx-ng-scaled": {
+      "projectType": "library",
+      "root": "projects/sbx-ng-scaled",
+      "sourceRoot": "projects/sbx-ng-scaled/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/sbx-ng-scaled/tsconfig.lib.json",
+            "project": "projects/sbx-ng-scaled/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/sbx-ng-scaled/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/sbx-ng-scaled/src/test.ts",
+            "tsConfig": "projects/sbx-ng-scaled/tsconfig.spec.json",
+            "karmaConfig": "projects/sbx-ng-scaled/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/sbx-ng-scaled/tsconfig.lib.json",
+              "projects/sbx-ng-scaled/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "sbx-ng-scaled-demo": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/sbx-ng-scaled-demo",
+      "sourceRoot": "projects/sbx-ng-scaled-demo/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/sbx-ng-scaled-demo",
+            "index": "projects/sbx-ng-scaled-demo/src/index.html",
+            "main": "projects/sbx-ng-scaled-demo/src/main.ts",
+            "polyfills": "projects/sbx-ng-scaled-demo/src/polyfills.ts",
+            "tsConfig": "projects/sbx-ng-scaled-demo/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/sbx-ng-scaled-demo/src/favicon.ico",
+              "projects/sbx-ng-scaled-demo/src/assets"
+            ],
+            "styles": [
+              "projects/sbx-ng-scaled-demo/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/sbx-ng-scaled-demo/src/environments/environment.ts",
+                  "with": "projects/sbx-ng-scaled-demo/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "sbx-ng-scaled-demo:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "sbx-ng-scaled-demo:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "sbx-ng-scaled-demo:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/sbx-ng-scaled-demo/src/test.ts",
+            "polyfills": "projects/sbx-ng-scaled-demo/src/polyfills.ts",
+            "tsConfig": "projects/sbx-ng-scaled-demo/tsconfig.spec.json",
+            "karmaConfig": "projects/sbx-ng-scaled-demo/karma.conf.js",
+            "assets": [
+              "projects/sbx-ng-scaled-demo/src/favicon.ico",
+              "projects/sbx-ng-scaled-demo/src/assets"
+            ],
+            "styles": [
+              "projects/sbx-ng-scaled-demo/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/sbx-ng-scaled-demo/tsconfig.app.json",
+              "projects/sbx-ng-scaled-demo/tsconfig.spec.json",
+              "projects/sbx-ng-scaled-demo/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/sbx-ng-scaled-demo/e2e/protractor.conf.js",
+            "devServerTarget": "sbx-ng-scaled-demo:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "sbx-ng-scaled-demo:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "sbx-ng-scaled"
+}
